@@ -434,15 +434,18 @@ public class GestionDatos {
 		//Contamos cuantas columnas tiene
 		int x = matriz[0].length - 1;
 		
-		//Con esto hacemos espejo al revés (no se porqué, debería de crear el espejo normal - creo -)
+		//Con esto se crea el espejo
 		for(int i = 0; i < matriz.length - 1; i++) {
 			for(int j = 0; j < x; j++) {
-				matriz[i][x - j] = bi.getRGB(i,j);
+				//matriz[matriz.length-1-i][j] = bi.getRGB(i,j);
+				matriz[i][j] = bi.getRGB(matriz.length-1-i,j);
 			}
 		}
 		
+		//ESTO NO HACE FALTA
+		
 		//Giramos 2 veces para que quede el espejo bien (en matrices nuevas)
-		for(int i = 0; i < matriz.length - 1; i++) {
+		/*for(int i = 0; i < matriz.length - 1; i++) {
 			for(int j = 0; j < x; j++) {
 				matriz2[j][x-i] = matriz[i][j];
 			}
@@ -451,14 +454,14 @@ public class GestionDatos {
 			for(int j = 0; j < x; j++) {
 				matriz3[j][x-i] = matriz2[i][j];
 			}
-		}
+		}*/
 		
 		
 		
 		//Una vez tenemos la matriz correcta, escribimos en el bi
-		for(int i=0; i < matriz3.length; i++) {
-			for(int j=0; j < matriz3.length; j++) {
-				bi.setRGB(i, j, matriz3[i][j]);
+		for(int i=0; i < matriz.length; i++) {
+			for(int j=0; j < matriz.length; j++) {
+				bi.setRGB(i, j, matriz[i][j]);
 			}
 		}
 		
