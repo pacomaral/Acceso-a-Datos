@@ -58,6 +58,10 @@ public class GestionDatos {
 	//Objetos y variables necesarias para método de rotar imagen
 	private BufferedImage bi;
 	
+	//Objetos y variables necesarias para el ejercicio 1 de la prueba
+	private ObjectOutputStream ous_ej1 = null;
+	private ObjectInputStream ois_ej1 = null;
+	
 	public GestionDatos() {
 
 	}
@@ -65,7 +69,7 @@ public class GestionDatos {
 	//TODO: Implementa una función para abrir ficheros
 	public Object abrirFichero(String fichero, int tipo_objeto) throws FileNotFoundException {
 		
-		//Creamos el objeto primer, inicializandolo a null
+		//Creamos el objeto primero, inicializandolo a null
 		Object obj = null;
 		
 		//Si el parámetro es 1, devolveremos un FileReader
@@ -124,7 +128,6 @@ public class GestionDatos {
 		while( (cadena = br1.readLine()) != null ) {
 			contenido1.append(cadena);
 			contenido1.append("\n");
-			
 		}
 		while( (cadena = br2.readLine()) != null) {
 			contenido2.append(cadena);
@@ -469,6 +472,62 @@ public class GestionDatos {
 		ImageIO.write(bi, "jpg", fileDestino);
 	
 		
+	}
+	
+	//EJERCICIO 1 PRUEBA
+	
+	//Lanzamos la excepciones para controlarlas en GestionEventos
+	public void modificarAnyo(String titulo, int anyo) throws FileNotFoundException, ClassNotFoundException, IOException {
+		
+		//Antes que nada, recuperamos el libro del cual queramos modificar el año
+		Libro nuevoLibro = this.recuperarLibro(titulo);
+		
+		//Del objeto libro creado, modificamos el año
+		nuevoLibro.setAnyo(anyo);
+		
+		//Borramos el fichero en concreto para poder volverlo a escribir
+		File libroABorrar = new File("libros/" + titulo);
+		libroABorrar.delete();
+		
+		//Escribimos de nuevo el fichero con el objeto libro modificado
+		ous_ej1 = new ObjectOutputStream(new FileOutputStream("libros/" + titulo));
+		
+		ous_ej1.writeObject(nuevoLibro);
+		
+		//Cerramos flujo
+		ous_ej1.close();
+		
+	}
+	
+	//EJERCICIO 2
+	
+	//El método devolverá el numero de palabras con la longitud menor a la introducida
+	//Si no hay ninguna, devolverá -1
+	public int numPalabrasLongitudMenor(String fich, int longitud) throws IOException {
+		
+		String palabra;
+		int contador=0;
+		
+		//Creamos filereader
+		FileReader fr = (FileReader) this.abrirFichero(fich, 1);
+		
+		//Creamos el bufferedReader
+		BufferedReader br = crearBuffer(fr);
+		
+		//Para cada palabra del fichero, si su longitud es menor que la necesaria, sumamos 1 al contador
+		while((palabra = br.readLine()) != null) {
+			if(palabra.length() < longitud) {
+				contador++;
+			}
+		}
+		
+		//Si el contador no es mayor que 0, devolveremos -1. Si no, el mismo contador
+		if(contador > 0) {
+			return contador;
+		}
+		else {
+			return -1;
+		}
 	}
 	
 	

@@ -14,6 +14,14 @@ public class LaunchView extends JFrame {
 	private ButtonGroup grupo1, grupo2;
 	private JButton rotarImagen, crearEspejo;
 	
+	//Ejercicio 1
+	private JButton cambiarAnyo;
+	
+	//Ejercicio 2
+	private JButton botonLongitud;
+	private JTextField cajaLongitud;
+	private JLabel etiquetaLongitud;
+	
 	private JPanel panel;
 	
 	public LaunchView() {
@@ -60,6 +68,9 @@ public class LaunchView extends JFrame {
 		copiarFichero = new JButton("Copiar fichero");
 		copiarFichero.setPreferredSize(new Dimension(150, 26));
 		
+		cambiarAnyo = new JButton("Modificar año");
+		cambiarAnyo.setPreferredSize(new Dimension(150, 26));
+		
 		etiquetaFichOrdenar = new JLabel("Fichero origen: ");
 		etiquetaFichDestino = new JLabel("Fichero destino: ");
 		
@@ -70,6 +81,12 @@ public class LaunchView extends JFrame {
 		etiquetaAutor = new JLabel("Autor");
 		etiquetaNumPags = new JLabel("Num. Páginas");
 		etiquetaEditor = new JLabel("Editor");
+		
+		//Ejercicio 2
+		etiquetaLongitud = new JLabel("Longitud");
+		cajaLongitud = new JTextField("",10);
+		botonLongitud = new JButton("Ejercicio 2");
+		botonLongitud.setPreferredSize(new Dimension(150, 26));
 		
 		cajaId = new JTextField("",10);
 		cajaTitulo = new JTextField("",10);
@@ -91,12 +108,15 @@ public class LaunchView extends JFrame {
 		crearEspejo = new JButton("Crear espejo");
 		buscar.setPreferredSize(new Dimension(150, 26));
 		
+		panel.add(botonLongitud);
 		panel.add(comparar);
 		panel.add(buscar);
 		panel.add(label_f1);
 		panel.add(fichero1);
 		panel.add(label_f2);
 		panel.add(fichero2);
+		panel.add(etiquetaLongitud);
+		panel.add(cajaLongitud);
 		panel.add(label_pal);
 		panel.add(palabra);
 		panel.add(opcion1);
@@ -129,13 +149,45 @@ public class LaunchView extends JFrame {
 		panel.add(anyadirLibro);
 		panel.add(recuperarLibro);
 		panel.add(recuperarTodos);
-		
+		panel.add(cambiarAnyo);
 		
         // Añadimos el JPanel al JFrame
         this.getContentPane().add(panel);		
 		
 	}	
 	
+	public JButton getBotonLongitud() {
+		return botonLongitud;
+	}
+
+	public void setBotonLongitud(JButton botonLongitud) {
+		this.botonLongitud = botonLongitud;
+	}
+
+	public JTextField getCajaLongitud() {
+		return cajaLongitud;
+	}
+
+	public void setCajaLongitud(JTextField cajaLongitud) {
+		this.cajaLongitud = cajaLongitud;
+	}
+
+	public JLabel getEtiquetaLongitud() {
+		return etiquetaLongitud;
+	}
+
+	public void setEtiquetaLongitud(JLabel etiquetaLongitud) {
+		this.etiquetaLongitud = etiquetaLongitud;
+	}
+
+	public JButton getCambiarAnyo() {
+		return cambiarAnyo;
+	}
+
+	public void setCambiarAnyo(JButton cambiarAnyo) {
+		this.cambiarAnyo = cambiarAnyo;
+	}
+
 	public JButton getRotarImagen() {
 		return rotarImagen;
 	}

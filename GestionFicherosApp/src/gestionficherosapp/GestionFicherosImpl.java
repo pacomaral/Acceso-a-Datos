@@ -54,7 +54,9 @@ public class GestionFicherosImpl implements GestionFicheros {
 
 		System.out.println("holaaa");
 		if (carpetaDeTrabajo.getParentFile() != null) {
+			//Nos vamos al directorio anterior
 			carpetaDeTrabajo = carpetaDeTrabajo.getParentFile();
+			//Actualizamos el contenido
 			actualiza();
 		}
 
@@ -66,7 +68,7 @@ public class GestionFicherosImpl implements GestionFicheros {
 		//Si no tenemos permisos de escritura en el directorio que queremos crear la carpeta,
 		//lanzamos una excepción
 		if(!carpetaDeTrabajo.canWrite()) {
-			throw new GestionFicherosException("No tienes permisos dee escritura");
+			throw new GestionFicherosException("No tienes permisos de escritura");
 		}
 		
 		//Si el directorio ya existe, lanzaremos una excepción
@@ -77,6 +79,7 @@ public class GestionFicherosImpl implements GestionFicheros {
 		//crear la carpeta -> lanzará una excepción
 		file.mkdir();
 		
+		//Actualizamos contenido
 		actualiza();
 	}
 

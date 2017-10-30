@@ -19,6 +19,12 @@ public class GestionEventos {
 	private ActionListener actionListener_comparar, actionListener_buscar, actionListener_copiar, actionListener_ordenar, actionListener_anyadir, actionListener_recuperarLibro, actionListener_recuperarTodos;
 	private ActionListener actionListener_rotarFoto, actionListener_crearEspejo;
 	
+	//Actividad 1
+	private ActionListener actionListener_cambiarAnyo;
+	
+	//Ejercicio 2
+	private ActionListener actionListener_numPalabrasLongitudMenor;
+	
 	private String fichero1, fichero2, fichero3;
 	private boolean resultado;
 	private int posicion;
@@ -135,6 +141,32 @@ public class GestionEventos {
 			}
 		};
 		view.getCrearEspejo().addActionListener(actionListener_crearEspejo);
+		
+		
+		//EJERCICIO 1
+		
+		//LISTENER BOTON DE CAMBIAR AÑO
+		//-----------------------------------------
+		actionListener_cambiarAnyo = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				// Llamamos al método
+				int c = call_modificarAnyo();
+			}
+		};
+		view.getCambiarAnyo().addActionListener(actionListener_cambiarAnyo);
+		
+		
+		//EJERCICIO 2
+		
+		//LISTENER BOTON DE BUSCAR NUM PALABRAS....
+		//-----------------------------------------
+		actionListener_numPalabrasLongitudMenor = new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				// Llamamos al método
+				int c = call_numPalabrasLongitudMenor();
+			}
+		};
+		view.getBotonLongitud().addActionListener(actionListener_numPalabrasLongitudMenor);
 	}
 
 	private int call_compararContenido() {
@@ -379,5 +411,68 @@ public class GestionEventos {
 		}
 		return 1;
 	}
+	
+	//EJERCICIO 1
+	private int call_modificarAnyo() {
+		//Si están los dos campos vacíos, mostramos info
+		if(view.getCajaTitulo().getText().isEmpty() && view.getCajaAnyo().getText().isEmpty()){
+			view.mostrarMensaje("Debes escribir el titulo del libro a modificar y el nuevo año");
+		}
+		//Si algún campo está vacío, mostramos info
+		else if(view.getCajaAnyo().getText().isEmpty() || view.getCajaTitulo().getText().isEmpty()) {
+			view.mostrarMensaje("Te falta escribir el título del libro o el año nuevo");
+		}
+		else {
+			//Si el libro no existe, mostramos error
+			try {
+					model.modificarAnyo(view.getCajaTitulo().getText(), Integer.parseInt(view.getCajaAnyo().getText()));
+					view.mostrarMensaje("Año del libro: " + view.getCajaTitulo().getText() + " modificado con éxito");
+				}
+			//Excepciones a controlar
+			catch (NumberFormatException e) {
+				e.printStackTrace();
+				view.showError("No has introducido un formato de año válido");
+			} catch (FileNotFoundException e) {
+				view.showError("El libro " + view.getCajaTitulo().getText() + " no existe.");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
+		}
+		
+		return 1;
+	}
+	
+	//EJERCICIO 2
+	private int call_numPalabrasLongitudMenor() {
+		
+		if(view.getCajaLongitud().getText().isEmpty() || view.getFichero1().getText().isEmpty()) {
+			view.showError("Debes introducir un fichero a analizar (fichero 1) y la longitud máxima que tienen que tener las palabras");
+		}
+		else {
+			int c = 0;
+			try {
+				//Llamamos al método si está todo correcto y recuperamos el num de palabras que coinciden en variable 'c'
+				c = model.numPalabrasLongitudMenor(view.getFichero1().getText(), Integer.parseInt(view.getCajaLongitud().getText()));
+			} catch (NumberFormatException e) {
+				view.showError("No has introducido una longitud válida");
+			} catch (IOException e) {
+				view.showError("No se ha encontrado el fichero " + view.getFichero1().getText());
+			}
+			//Si ha devuelto -1, es que ninguna palabra coincide
+			if(c == -1) {
+				view.showError("No existe ninguna palabra que tenga menos de " + view.getCajaLongitud().getText() + " carácteres");
+			}
+			else {
+				view.getTextArea().setText( c + " palabras tienen menos de " + view.getCajaLongitud().getText() + " carácteres en el fichero");
+			}
+		}
+		
+		return 1;
+	}
+	
 }
