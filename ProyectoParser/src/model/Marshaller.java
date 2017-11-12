@@ -94,7 +94,7 @@ public class Marshaller {
 		Text nombreTexto = dom.createTextNode(l.getListaAutores().get(0));
 		nombreEle.appendChild(nombreTexto);
 		
-		//Si tenemos dos nombres de autores, creamos el nodo adicional dentro del nodo <autor>
+		//Si tenemos dos nombres de autores, creamos el nodo adicional dentro del nodo <autor> y recogeremos el valor del arraylist de autores
 		if(l.getListaAutores().size() > 1) {
 			Text nombreTexto2 = dom.createTextNode(l.getListaAutores().get(1));
 			nombre2Ele.appendChild(nombreTexto2);
