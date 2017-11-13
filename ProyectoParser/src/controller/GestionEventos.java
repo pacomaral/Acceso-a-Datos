@@ -40,6 +40,7 @@ public class GestionEventos {
 		listener_botonParsear = new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				
+				
 				parsearLibro();
 				
 			}
@@ -67,6 +68,7 @@ public class GestionEventos {
 	}
 
 	private void parsearLibro() {
+		
 		
 		
 		if(vista.getCajaFichero().getText().isEmpty()){

@@ -165,6 +165,8 @@ public class Parser {
 			str.append(libros.get(i).toString());
 		}
 		
+		libros.clear();
+		
 		return str.toString();
 	}
 	
