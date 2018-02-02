@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-feb-2018 15:21:21 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="Tema" table="TEMA">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="titulo" type="java.lang.String">
+            <column name="TITULO" />
+        </property>
+        <property name="duracion" type="java.lang.String">
+            <column name="DURACION" />
+        </property>
+    </class>
+</hibernate-mapping>

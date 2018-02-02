@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-feb-2018 15:21:21 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="Asignatura" table="ASIGNATURA">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <property name="horas" type="int">
+            <column name="HORAS" />
+        </property>
+        <property name="nombre" type="java.lang.String">
+            <column name="NOMBRE" />
+        </property>
+        <list name="temas" inverse="false" table="TEMAS_ASIGNATURA" lazy="true" access="field">
+            <key>
+                <column name="ID" />
+            </key>
+            <list-index></list-index>
+            <composite-element class="Tema">
+            	<property name="titulo" type="java.lang.String"/>
+            	<property name="duracion" type="java.lang.String"/>
+            </composite-element>
+        </list>
+    </class>
+</hibernate-mapping>
