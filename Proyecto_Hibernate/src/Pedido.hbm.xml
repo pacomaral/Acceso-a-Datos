@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-ene-2018 16:59:38 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="Pedido" table="PEDIDO">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <property name="fecha" type="java.lang.String">
+            <column name="FECHAPEDIDO" />
+        </property>
+        <list name="items" inverse="false" table="ITEMSPEDIDO" lazy="true" access="field">
+            <key>
+                <column name="ID" />
+            </key>
+            <list-index></list-index>
+            <composite-element class="Item">
+            	<property name="nombre" type="java.lang.String"/>
+            	<property name="cantidad" type="int"/>
+            </composite-element>
+        </list>
+    </class>
+</hibernate-mapping>
